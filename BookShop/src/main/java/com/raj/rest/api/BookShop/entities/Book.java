@@ -1,62 +1,111 @@
- package com.raj.rest.api.BookShop.entities;
+package com.raj.rest.api.BookShop.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "books", schema = "core")
 public class Book {
-	
-	private long id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "bookid")
+	private Long bookId;
+
 	private String title;
+
+	private String author;
+
 	private String description;
-	private String authore;
-	private String addition;
-	public Book(long id, String title, String description, String authore, String addition) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.authore = authore;
-		this.addition = addition;
+
+	private double price;
+
+	@Column(name = "quantityavailable")
+	private Integer quantityAvailable;
+
+	private String genre;
+
+	@Column(name = "publicationdate")
+	private LocalDate publicationDate;
+
+	private String publisher;
+
+	public Long getBookId() {
+		return bookId;
 	}
-	public Book() {
-		super();
-		// TODO Auto-generated constructor stub
+
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getAuthore() {
-		return authore;
+
+	public double getPrice() {
+		return price;
 	}
-	public void setAuthore(String authore) {
-		this.authore = authore;
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
-	public String getAddition() {
-		return addition;
+
+	public Integer getQuantityAvailable() {
+		return quantityAvailable;
 	}
-	public void setAddition(String addition) {
-		this.addition = addition;
+
+	public void setQuantityAvailable(Integer quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
 	}
-	
-	
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public LocalDate getPublicationDate() {
+		return publicationDate;
+	}
+
+	public void setPublicationDate(LocalDate publicationDate) {
+		this.publicationDate = publicationDate;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
 
 }
