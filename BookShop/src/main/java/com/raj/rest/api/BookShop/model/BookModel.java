@@ -3,6 +3,7 @@ package com.raj.rest.api.BookShop.model;
 import java.time.LocalDate;
 
 public class BookModel {
+	private Long bookId;
 	private String title;
 	private String author;
 	private String description;
@@ -11,6 +12,16 @@ public class BookModel {
 	private String genre;
 	private LocalDate publicationDate;
 	private String publisher;
+	
+ 
+	
+	public Long getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
+	}
 
 	public String getTitle() {
 		return title;
@@ -73,6 +84,20 @@ public class BookModel {
 	}
 
 	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public BookModel(Long bookId,String title, String author, String description, double price, Integer quantityAvailable,
+			String genre, LocalDate publicationDate, String publisher) {
+		super();
+		this.bookId=bookId;
+		this.title = title;
+		this.author = author;
+		this.description = description;
+		this.price = price;
+		this.quantityAvailable = quantityAvailable;
+		this.genre = genre;
+		this.publicationDate = publicationDate;
 		this.publisher = publisher;
 	}
 

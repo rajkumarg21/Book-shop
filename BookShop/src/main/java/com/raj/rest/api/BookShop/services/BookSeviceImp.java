@@ -2,32 +2,73 @@ package com.raj.rest.api.BookShop.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.raj.rest.api.BookShop.Converter.DtoConverter;
 import com.raj.rest.api.BookShop.entities.Book;
 import com.raj.rest.api.BookShop.model.BookModel;
 import com.raj.rest.api.BookShop.repository.BookRepository;
 
 @Service
-public class BookSeviceImp {
+
+public class BookSeviceImp implements BookService {
 
 	@Autowired
 	private BookRepository bookRepository;
+	
+	
+	public BookModel addBook(BookModel bookDTO) {
+		Book book = DtoConverter.DtoToEntity(bookDTO);
+		Book savedBook=bookRepository.save(book);
+		BookModel shavedBookmodel= DtoConverter.EntityToDto(savedBook);
+		return shavedBookmodel;
+	}
+ 
+	 @Override
+	public List<BookModel> getBooks() {
+		 
 
-	public Book addBook(BookModel bookDTO) {
-		Book book = new Book();
-		book.setTitle(bookDTO.getTitle());
-		book.setAuthor(bookDTO.getAuthor());
-		book.setDescription(bookDTO.getDescription());
-		book.setPrice(bookDTO.getPrice());
-		book.setQuantityAvailable(bookDTO.getQuantityAvailable());
-		book.setGenre(bookDTO.getGenre());
-		book.setPublicationDate(bookDTO.getPublicationDate());
-		book.setPublisher(bookDTO.getPublisher());
+		List<Book> book= bookRepository.findAll();
+		return book.stream().map(DtoConverter::EntityToDto)
+                .collect(Collectors.toList()); 
+	}
+ 
+	 @Override
+	public BookModel updateBook(BookModel book) {
 
-		return bookRepository.save(book);
+		Book existingBook = bookRepository.findById(book.getBookId()).get();
+
+		existingBook.setTitle(book.getTitle());
+		existingBook.setAuthor(book.getAuthor());
+		existingBook.setDescription(book.getDescription());
+		existingBook.setGenre(book.getGenre());
+		existingBook.setPrice(book.getPrice());
+		existingBook.setPublicationDate(book.getPublicationDate());
+		existingBook.setPublisher(book.getPublisher());
+		existingBook.setQuantityAvailable(book.getQuantityAvailable());
+		Book updatedBook = bookRepository.save(existingBook);
+		return DtoConverter.EntityToDto(updatedBook);
+	    
+		
 	}
 
+	@Override
+	public void deleteBook(Long bookId) {
+		 bookRepository.deleteById(bookId);
+		
+	}
+
+	@Override
+	public BookModel getBookById(Long bookId) {
+		 java.util.Optional<Book> optionalUser =  bookRepository.findById(bookId);
+	       Book book = optionalUser.get();
+	        return DtoConverter.EntityToDto(book);
+	}
+	
+	
+	
 }

@@ -108,4 +108,23 @@ public class Book {
 		this.publisher = publisher;
 	}
 
+	public Book(Long BookId, String title, String author, String description, double price, Integer quantityAvailable,
+			String genre, LocalDate publicationDate, String publisher) {
+		super();
+		this.bookId=bookId;
+		this.title = title;
+		this.author = author;
+		this.description = description;
+		this.price = price;
+		this.quantityAvailable = quantityAvailable;
+		this.genre = genre;
+		this.publicationDate = publicationDate;
+		this.publisher = publisher;
+	}
+
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }
