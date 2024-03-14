@@ -12,9 +12,7 @@ public class BookModel {
 	private String genre;
 	private LocalDate publicationDate;
 	private String publisher;
-	
- 
-	
+
 	public Long getBookId() {
 		return bookId;
 	}
@@ -87,10 +85,10 @@ public class BookModel {
 		this.publisher = publisher;
 	}
 
-	public BookModel(Long bookId,String title, String author, String description, double price, Integer quantityAvailable,
-			String genre, LocalDate publicationDate, String publisher) {
+	public BookModel(Long bookId, String title, String author, String description, double price,
+			Integer quantityAvailable, String genre, LocalDate publicationDate, String publisher) {
 		super();
-		this.bookId=bookId;
+		this.bookId = bookId;
 		this.title = title;
 		this.author = author;
 		this.description = description;
